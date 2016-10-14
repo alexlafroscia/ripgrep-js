@@ -3,10 +3,27 @@
   "version": "0.1.0",
   "description": "Node.js wrapper around Ripgrep",
   "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "files": [
+    "index.js",
+    "yarn.lock"
+  ],
   "repository": {
     "url": "git@github.com:alexlafroscia/ripgrep-js.git",
     "type": "git"
   },
   "author": "Alex LaFroscia <alex@lafroscia.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">= 4.5.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  },
+  "dependencies": {
+    "chai-as-promised": "^6.0.0"
+  }
 }
