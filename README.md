@@ -4,6 +4,8 @@
 
 **Note:** I have nothing to do with `ripgrep` or the search functionality of this JS library.  This is only a wrapper to expose `ripgrep` results in Node.js.  All credit for the underlying tool go to [`@BurntSushi`][burntsushi] and the lovely contributors to the original project.
 
+**Also Note:** `ripgrep` must be installed somewhere in your `$PATH` for this to work.
+
 ## Usage
 
 ```javascript
