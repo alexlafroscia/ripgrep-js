@@ -21,17 +21,47 @@ function formatResults(stdout) {
     .map((line) => new Match(line));
 }
 
-module.exports = function ripGrep(cwd, searchTerm) {
+/**
+ * @method ripGrep
+ * @param {string} cwd
+ * @param {object|string} options if a string is provided, it will be used as the `searchTerm`
+ * @param {string} options.regex a regex pattern to search for. See `-e` option
+ * @param {string} options.string a fixed string to search for. See `-F` option
+ * @param {Array<string>} option.globs a set of globs to include/exclude. See `-g` option
+ * @param {string} [searchTerm]
+ */
+module.exports = function ripGrep(cwd, options, searchTerm) {
+  // If you're invoking the function with two arguments, just the `cwd` and `searchTerm`
+  if (arguments.length === 2 && typeof options === 'string') {
+    searchTerm = options;
+    options = {};
+  }
+
   if (!cwd) {
     return Promise.reject('No `cwd` provided');
   }
 
-  if (!searchTerm) {
+  if (arguments.length === 1) {
     return Promise.reject('No search term provided');
   }
 
+  options.regex = options.regex || '';
+  options.globs = options.globs || [];
+  options.string = searchTerm || options.string || '';
+
+  let execString = 'rg --column --line-number --color never';
+  if (options.regex) {
+    execString = `${execString} -e ${options.regex}`;
+  } else if (options.string) {
+    execString = `${execString} -F ${options.string}`;
+  }
+
+  execString = options.globs.reduce((command, glob) => {
+    return `${command} -g '${glob}'`;
+  }, execString);
+
   return new Promise(function(resolve, reject) {
-    exec(`rg --column --line-number --color never -e ${searchTerm}`, { cwd }, (error, stdout, stderr) => {
+    exec(execString, { cwd }, (error, stdout, stderr) => {
       if (!error || (error && stderr === '')) {
         resolve(formatResults(stdout));
       } else {

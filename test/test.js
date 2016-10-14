@@ -68,6 +68,36 @@ describe('search api', function() {
       expect(result.length).to.equal(2);
     });
   });
+
+  it('can use a regex to make a search', function() {
+    const result = rg(fixtureDir('single-file-with-foo'), { regex: 'fo{2}' });
+
+    return result.then((result) => {
+      expect(result.length).to.equal(1);
+    });
+  });
+
+  it('can provide a search string through the `options` object', function() {
+    const result = rg(fixtureDir('single-file-with-foo'), { string: 'foo' });
+
+    return result.then((result) => {
+      expect(result.length).to.equal(1);
+    });
+  });
+
+  it('can add glob patterns to limit search results', function() {
+    const result = rg(fixtureDir('glob-ignore'), {
+      string: 'foo',
+      globs: [
+        '!ignore-this-directory/**',
+        '!ignore-this-directory-too/**'
+      ]
+    });
+
+    return result.then((result) => {
+      expect(result.length).to.equal(1);
+    });
+  });
 });
 
 describe('Match class', function() {

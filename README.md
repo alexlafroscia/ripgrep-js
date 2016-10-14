@@ -2,7 +2,7 @@
 
 > A Node.js wrapper around [ripgrep][ripgrep]
 
-**Note:** I have nothing to do with `ripgrep` or the search functionality of this JS library.  This is only a wrapper to expose `ripgrep` results in Node.js.  All credit for the underlying tool go to [`@BurntSushi`][burntsushi] and the lovely contributors to his project.
+**Note:** I have nothing to do with `ripgrep` or the search functionality of this JS library.  This is only a wrapper to expose `ripgrep` results in Node.js.  All credit for the underlying tool go to [`@BurntSushi`][burntsushi] and the lovely contributors to the original project.
 
 ## Usage
 
@@ -15,9 +15,20 @@ rg('path/to/search', 'foo').then((result) => {
   const [ firstMatch ] = results;
 
   // Match info provided by each result object
-  const { file, column, line, match } = firstMatch;
+  firstMatch.file;
+  firstMatch.line;
+  firstMatch.column;
+  firstMatch.match;
 });
 ```
+
+You can also pass an object as the second argument, which supports the following keys:
+
+- **regex: string** A regex pattern to match by. Note: this is a Rust-flavored regex pattern, not a JS one
+- **string: string** A string to match by. Same as passing a string as the second argument.
+- **globs: Array\<string\>** An array of glob patterns to limit the results by
+
+For further details and information, you can find real usage examples in `test/test.js`.
 
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [burntsushi]: https://github.com/BurntSushi
