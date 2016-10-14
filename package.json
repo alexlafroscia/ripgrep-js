@@ -1,0 +1,12 @@
+{
+  "name": "ripgrep-js",
+  "version": "0.1.0",
+  "description": "Node.js wrapper around Ripgrep",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:alexlafroscia/ripgrep-js.git",
+    "type": "git"
+  },
+  "author": "Alex LaFroscia <alex@lafroscia.com>",
+  "license": "MIT"
+}
