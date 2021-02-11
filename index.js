@@ -36,11 +36,11 @@ module.exports = function ripGrep(cwd, options, searchTerm) {
   }
 
   if (!cwd) {
-    return Promise.reject('No `cwd` provided');
+    return Promise.reject(new Error('No `cwd` provided'));
   }
 
   if (arguments.length === 1) {
-    return Promise.reject('No search term provided');
+    return Promise.reject(new Error('No search term provided'));
   }
 
   options.regex = options.regex || '';

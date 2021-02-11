@@ -1,3 +1,6 @@
 {
-  "extends": ["@movable/eslint-config", "@movable/eslint-config-node"]
+  "extends": ["@movable/eslint-config", "@movable/eslint-config-node"],
+  "env": {
+    "jest": true
+  }
 }
