@@ -9,19 +9,19 @@
 ## Usage
 
 ```javascript
-const rg = require('ripgrep-js');
+import { ripGrep as rg } from 'ripgrep-js';
 
 // Give `rg` an absolute path to search in and the search term
-rg('path/to/search', 'foo').then((result) => {
-  // `result` is an array of matches
-  const [firstMatch] = results;
+const results = await rg('path/to/search', 'foo');
 
-  // Match info provided by each result object
-  firstMatch.file;
-  firstMatch.line;
-  firstMatch.column;
-  firstMatch.match;
-});
+// `results` is an array of matches
+const [firstMatch] = results;
+
+// Match info provided by each result object
+firstMatch.file;
+firstMatch.line;
+firstMatch.column;
+firstMatch.match;
 ```
 
 You can also pass an object as the second argument, which supports the following keys:

@@ -1,20 +1,20 @@
-'use strict';
+import { resolve } from 'path';
 
-const path = require('path');
-const rg = require('..');
+import { ripGrep as rg } from '../src/index';
+import { Match } from '../src/types';
 
-const { Match } = rg;
-
-function fixtureDir(name) {
-  return path.resolve(__dirname, '../__fixtures__', name);
+function fixtureDir(name: string) {
+  return resolve(__dirname, '../__fixtures__', name);
 }
 
 describe('input validation', function () {
   test('requires that a CWD is provided', async function () {
+    // @ts-expect-error
     await expect(rg()).rejects.toThrow('No `cwd` provided');
   });
 
   test('requires that a search term is provided', async function () {
+    // @ts-expect-error
     await expect(rg('foo')).rejects.toThrow('No search term provided');
   });
 });
@@ -67,7 +67,7 @@ describe('search api', function () {
 });
 
 describe('Match class', function () {
-  let result;
+  let result: Match;
 
   beforeEach(async function () {
     const allResults = await rg(fixtureDir('single-file-with-foo'), 'foo');

@@ -1,5 +1,15 @@
 {
-  "extends": ["@movable/eslint-config", "@movable/eslint-config-node"],
+  "extends": [
+    "@movable/eslint-config",
+    "@movable/eslint-config-node",
+    "@movable/eslint-config-typescript"
+  ],
+  "rules": {
+    "node/no-unsupported-features/es-syntax": "off",
+    "node/no-missing-import": "off",
+
+    "@typescript-eslint/no-non-null-assertion": "off"
+  },
   "env": {
     "jest": true
   }
