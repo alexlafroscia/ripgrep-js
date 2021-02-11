@@ -2,7 +2,7 @@
 
 > A Node.js wrapper around [ripgrep][ripgrep]
 
-**Note:** I have nothing to do with `ripgrep` or the search functionality of this JS library.  This is only a wrapper to expose `ripgrep` results in Node.js.  All credit for the underlying tool go to [`@BurntSushi`][burntsushi] and the lovely contributors to the original project.
+**Note:** I have nothing to do with `ripgrep` or the search functionality of this JS library. This is only a wrapper to expose `ripgrep` results in Node.js. All credit for the underlying tool go to [`@BurntSushi`][burntsushi] and the lovely contributors to the original project.
 
 **Also Note:** `ripgrep` must be installed somewhere in your `$PATH` for this to work.
 
@@ -14,7 +14,7 @@ const rg = require('ripgrep-js');
 // Give `rg` an absolute path to search in and the search term
 rg('path/to/search', 'foo').then((result) => {
   // `result` is an array of matches
-  const [ firstMatch ] = results;
+  const [firstMatch] = results;
 
   // Match info provided by each result object
   firstMatch.file;

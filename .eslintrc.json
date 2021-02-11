@@ -1,0 +1,3 @@
+{
+  "extends": ["@movable/eslint-config", "@movable/eslint-config-node"]
+}

@@ -16,9 +16,7 @@ function formatResults(stdout) {
     return [];
   }
 
-  return stdout
-    .split('\n')
-    .map((line) => new Match(line));
+  return stdout.split('\n').map((line) => new Match(line));
 }
 
 /**
@@ -60,7 +58,7 @@ module.exports = function ripGrep(cwd, options, searchTerm) {
     return `${command} -g '${glob}'`;
   }, execString);
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     exec(execString, { cwd }, (error, stdout, stderr) => {
       if (!error || (error && stderr === '')) {
         resolve(formatResults(stdout));
