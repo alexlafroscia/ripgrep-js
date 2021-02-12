@@ -1,11 +1,13 @@
-import { resolve } from 'path';
+import { Factory } from 'file-fixture-factory';
 
 import { ripGrep as rg } from '../src/index';
 import { Match } from '../src/types';
 
-function fixtureDir(name: string) {
-  return resolve(__dirname, '../__fixtures__', name);
-}
+const factory = new Factory('ripgrep-js');
+
+afterAll(async function () {
+  await factory.disposeAll();
+});
 
 describe('input validation', function () {
   test('requires that a CWD is provided', async function () {
@@ -21,7 +23,10 @@ describe('input validation', function () {
 
 describe('search api', function () {
   test('returns an array of matches', async function () {
-    const resolution = await rg(fixtureDir('single-file-with-foo'), 'foo');
+    const temp = await factory.createStructure({
+      'foo.txt': 'foo',
+    });
+    const resolution = await rg(temp.dir, 'foo');
 
     expect(resolution).toBeInstanceOf(Array);
 
@@ -31,19 +36,29 @@ describe('search api', function () {
   });
 
   test('returns an empty array when there are no matches', async function () {
-    const result = await rg(fixtureDir('single-file-with-foo'), 'bar');
+    const temp = await factory.createStructure({
+      'foo.txt': 'foo',
+    });
+    const result = await rg(temp.dir, 'bar');
 
     expect(result).toEqual([]);
   });
 
   test('combines results from multiple files', async function () {
-    const result = await rg(fixtureDir('multiple-files-with-foo'), 'foo');
+    const temp = await factory.createStructure({
+      'foo.txt': 'foo',
+      'other.txt': 'foo',
+    });
+    const result = await rg(temp.dir, 'foo');
 
     expect(result.length).toBe(2);
   });
 
   test('can use a regex to make a search', async function () {
-    const result = await rg(fixtureDir('single-file-with-foo'), {
+    const temp = await factory.createStructure({
+      'foo.txt': 'foo',
+    });
+    const result = await rg(temp.dir, {
       regex: 'fo{2}',
     });
 
@@ -51,13 +66,25 @@ describe('search api', function () {
   });
 
   test('can provide a search string through the `options` object', async function () {
-    const result = await rg(fixtureDir('single-file-with-foo'), { string: 'foo' });
+    const temp = await factory.createStructure({
+      'foo.txt': 'foo',
+    });
+    const result = await rg(temp.dir, { string: 'foo' });
 
     expect(result.length).toBe(1);
   });
 
   test('can add glob patterns to limit search results', async function () {
-    const result = await rg(fixtureDir('glob-ignore'), {
+    const temp = await factory.createStructure({
+      'foo.txt': 'foo',
+      'ignore-this-directory': {
+        'foo.txt': 'foo',
+      },
+      'ignore-this-directory-too': {
+        'foo.txt': 'foo',
+      },
+    });
+    const result = await rg(temp.dir, {
       string: 'foo',
       globs: ['!ignore-this-directory/**', '!ignore-this-directory-too/**'],
     });
@@ -66,7 +93,10 @@ describe('search api', function () {
   });
 
   test('can provide file type to search by', async function () {
-    const result = await rg(fixtureDir('single-file-with-foo'), {
+    const temp = await factory.createStructure({
+      'foo.txt': 'foo',
+    });
+    const result = await rg(temp.dir, {
       string: 'foo',
       fileType: 'html',
     });
@@ -78,8 +108,11 @@ describe('search api', function () {
 describe('Match class', function () {
   let result: Match;
 
-  beforeEach(async function () {
-    const allResults = await rg(fixtureDir('single-file-with-foo'), 'foo');
+  beforeAll(async function () {
+    const temp = await factory.createStructure({
+      'file.txt': 'foo',
+    });
+    const allResults = await rg(temp.dir, 'foo');
 
     result = allResults[0];
   });
