@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/alexlafroscia/ripgrep-js/compare/v2.0.0...v2.1.0) (2021-02-12)
+
+### Features
+
+- add debug logging ([4b9e54a](https://github.com/alexlafroscia/ripgrep-js/commit/4b9e54a2ec081d69d6af9c87d1aeab7624b2c9f1))
+
 ## [2.0.0](https://github.com/alexlafroscia/ripgrep-js/compare/v1.1.0...v2.0.0) (2021-02-12)
 
 ### ⚠ BREAKING CHANGES
