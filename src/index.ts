@@ -45,6 +45,16 @@ export function ripGrep(cwd: string, optionsOrSearchTerm: Options | string): Pro
     execString = `${execString} -F ${options.string}`;
   }
 
+  if (options.fileType) {
+    if (!Array.isArray(options.fileType)) {
+      options.fileType = [options.fileType];
+    }
+
+    for (const fileType of options.fileType) {
+      execString = `${execString} -t ${fileType}`;
+    }
+  }
+
   if (options.globs) {
     execString = options.globs.reduce((command, glob) => {
       return `${command} -g '${glob}'`;

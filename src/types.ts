@@ -12,6 +12,7 @@ type LocatorOptions = StringSearchOptions | RegexSearchOptions;
 
 export type Options = LocatorOptions & {
   globs?: Array<string>;
+  fileType?: string | Array<string>;
 };
 
 export class Match {

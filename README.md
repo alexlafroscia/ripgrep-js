@@ -29,6 +29,7 @@ You can also pass an object as the second argument, which supports the following
 - **regex: string** A regex pattern to match by. Note: this is a Rust-flavored regex pattern, not a JS one
 - **string: string** A string to match by. Same as passing a string as the second argument.
 - **globs: Array\<string\>** An array of glob patterns to limit the results by
+- **fileType: Array\<string\> | string** File type or types to limit the search to
 
 For further details and information, you can find real usage examples in `test/test.js`.
 

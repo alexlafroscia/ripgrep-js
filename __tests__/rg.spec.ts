@@ -64,6 +64,15 @@ describe('search api', function () {
 
     expect(result.length).toBe(1);
   });
+
+  test('can provide file type to search by', async function () {
+    const result = await rg(fixtureDir('single-file-with-foo'), {
+      string: 'foo',
+      fileType: 'html',
+    });
+
+    expect(result.length).toBe(0);
+  });
 });
 
 describe('Match class', function () {
