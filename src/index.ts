@@ -1,7 +1,10 @@
 import { exec } from 'child_process';
+import debug from 'debug';
 import { RipGrepError, Match, Options } from './types';
 
 export * from './types';
+
+const execLog = debug('ripgrep-js:exec');
 
 function formatResults(stdout: string) {
   stdout = stdout.trim();
@@ -47,6 +50,8 @@ export function ripGrep(cwd: string, optionsOrSearchTerm: Options | string): Pro
       return `${command} -g '${glob}'`;
     }, execString);
   }
+
+  execLog(execString);
 
   return new Promise(function (resolve, reject) {
     exec(execString, { cwd }, (error, stdout, stderr) => {

@@ -21,12 +21,16 @@
   },
   "author": "Alex LaFroscia <alex@lafroscia.com>",
   "license": "MIT",
+  "dependencies": {
+    "debug": "^4.3.1"
+  },
   "devDependencies": {
     "@movable/eslint-config": "^0.6.9",
     "@movable/eslint-config-node": "^0.4.3",
     "@movable/eslint-config-typescript": "^0.2.1",
     "@movable/prettier-config": "^0.3.6",
     "@tsconfig/node14": "^1.0.0",
+    "@types/debug": "^4.1.5",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.26",
     "husky": "^5.0.9",
