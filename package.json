@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@movable/eslint-config": "^0.6.9",
-    "@movable/eslint-config-node": "^0.4.3",
+    "@movable/eslint-config-node": "^1.0.0",
     "@movable/eslint-config-typescript": "^0.2.1",
     "@movable/prettier-config": "^0.3.6",
     "@tsconfig/node14": "^1.0.0",
