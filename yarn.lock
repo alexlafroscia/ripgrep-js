@@ -612,10 +612,10 @@
   dependencies:
     eslint-plugin-node "^11.1.0"
 
-"@movable/eslint-config-typescript@^0.2.1":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@movable/eslint-config-typescript/-/eslint-config-typescript-0.2.3.tgz#5a58522fcab107ab1ad7c0fe69bfef5ee4369582"
-  integrity sha512-0lBZLdYafL1EXaOP/d/1rIab+/b/jRE3LzdIpcHoPcJwK/pLlq/mIiDkyarmb4RvszmPhywdnWdFKZhnMshgmw==
+"@movable/eslint-config-typescript@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@movable/eslint-config-typescript/-/eslint-config-typescript-1.0.0.tgz#e84d8be496cc6e3e73f84ea30b0eaf62970eb7b3"
+  integrity sha512-9LBhMOGOOv5O8skpY6Msold4PpF17/DrnCnoGLUPVJpOlJGO0L8/zCG2Yftejv/LaSc4PrvItYZvLdJMA84rRg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.22.1"
     "@typescript-eslint/parser" "^4.22.1"
