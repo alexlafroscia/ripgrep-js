@@ -54,6 +54,18 @@ describe('search api', function () {
     expect(result.length).toBe(2);
   });
 
+  test('handling multiple results in one file', async function () {
+    const temp = await factory.createStructure({
+      'foo.txt': `
+        foo
+        foo
+      `,
+    });
+    const result = await rg(temp.dir, 'foo');
+
+    expect(result.length).toBe(2);
+  });
+
   test('can use a regex to make a search', async function () {
     const temp = await factory.createStructure({
       'foo.txt': 'foo',
