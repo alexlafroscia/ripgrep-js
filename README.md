@@ -17,11 +17,13 @@ const results = await rg('path/to/search', 'foo');
 // `results` is an array of matches
 const [firstMatch] = results;
 
-// Match info provided by each result object
-firstMatch.file;
-firstMatch.line;
-firstMatch.column;
-firstMatch.match;
+// Match information provided by each result object
+// This matches the JSON format that RipGrep itself produces
+firstMatch.path.text;
+firstMatch.lines.text;
+firstMatch.line_number;
+firstMatch.absolute_offset;
+firstMatch.submatches;
 ```
 
 You can also pass an object as the second argument, which supports the following keys:
@@ -30,6 +32,7 @@ You can also pass an object as the second argument, which supports the following
 - **string: string** A string to match by. Same as passing a string as the second argument.
 - **globs: Array\<string\>** An array of glob patterns to limit the results by
 - **fileType: Array\<string\> | string** File type or types to limit the search to
+- **multiline: boolean** Whether or not to enable multi-line matches
 
 For further details and information, you can find real usage examples in `test/test.js`.
 
