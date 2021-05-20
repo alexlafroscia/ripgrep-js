@@ -15,19 +15,40 @@ export type Options = LocatorOptions & {
   fileType?: string | Array<string>;
 };
 
+export type RipgrepJsonSubmatch = {
+  match: { text: string };
+  start: number;
+  end: number;
+};
+
+export type RipGrepJsonMatch = {
+  type: 'match';
+  data: {
+    path: {
+      text: string;
+    };
+    lines: {
+      text: string;
+    };
+    line_number: number;
+    absolute_offset: number;
+    submatches: Array<RipgrepJsonSubmatch>;
+  };
+};
+
 export class Match {
   file: string;
   line: number;
   column: number;
   match: string;
 
-  constructor(matchText: string) {
-    const splitText = matchText.split(':');
+  constructor(jsonResult: RipGrepJsonMatch, subMatch: RipgrepJsonSubmatch) {
+    this.file = jsonResult.data.path.text;
+    this.line = jsonResult.data.line_number;
 
-    this.file = splitText.shift()!;
-    this.line = parseInt(splitText.shift()!);
-    this.column = parseInt(splitText.shift()!);
-    this.match = splitText.join(':');
+    // Account for 0-index column numbers (when we want 1-index)
+    this.column = subMatch.start + 1;
+    this.match = subMatch.match.text;
   }
 }
 

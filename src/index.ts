@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import debug from 'debug';
-import { RipGrepError, Match, Options } from './types';
+import { RipGrepError, RipGrepJsonMatch, Match, Options } from './types';
 
 export * from './types';
 
@@ -13,7 +13,18 @@ function formatResults(stdout: string) {
     return [];
   }
 
-  return stdout.split('\n').map((line) => new Match(line));
+  return stdout
+    .split('\n')
+    .map((line) => JSON.parse(line))
+    .filter((jsonLine) => jsonLine.type === 'match')
+    .reduce((acc, resultJson: RipGrepJsonMatch) => {
+      return [
+        // Previous matches
+        ...acc,
+        // One new result per sub-match
+        ...resultJson.data.submatches.map((submatch) => new Match(resultJson, submatch)),
+      ];
+    }, [] as Match[]);
 }
 
 export function ripGrep(cwd: string, searchTerm: string): Promise<Array<Match>>;
@@ -38,7 +49,7 @@ export function ripGrep(cwd: string, optionsOrSearchTerm: Options | string): Pro
     return Promise.reject(new Error('No search term provided'));
   }
 
-  let execString = 'rg --column --line-number --color never';
+  let execString = 'rg --json';
   if ('regex' in options) {
     execString = `${execString} -e ${options.regex}`;
   } else if ('string' in options) {
