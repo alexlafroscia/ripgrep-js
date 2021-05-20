@@ -1,7 +1,5 @@
 import { Factory } from 'file-fixture-factory';
-
 import { ripGrep as rg } from '../src/index';
-import { Match } from '../src/types';
 
 const factory = new Factory('ripgrep-js');
 
@@ -31,7 +29,7 @@ describe('search api', function () {
     expect(resolution).toBeInstanceOf(Array);
 
     resolution.forEach(function (match) {
-      expect(match).toBeInstanceOf(Match);
+      expect(typeof match.path.text).toBe('string');
     });
   });
 
@@ -129,34 +127,5 @@ describe('search api', function () {
     });
 
     expect(result.length).toBe(1);
-  });
-});
-
-describe('Match class', function () {
-  let result: Match;
-
-  beforeAll(async function () {
-    const temp = await factory.createStructure({
-      'file.txt': 'foo',
-    });
-    const allResults = await rg(temp.dir, 'foo');
-
-    result = allResults[0];
-  });
-
-  test('contains the file name of the match', function () {
-    expect(result.file).toBe('file.txt');
-  });
-
-  test('contains the matches text', function () {
-    expect(result.match).toBe('foo');
-  });
-
-  test('contains the line number of the match', function () {
-    expect(result.line).toBe(1);
-  });
-
-  test('contains the column number of the match', function () {
-    expect(result.column).toBe(1);
   });
 });

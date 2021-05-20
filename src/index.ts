@@ -1,12 +1,12 @@
 import { exec } from 'child_process';
 import debug from 'debug';
-import { RipGrepError, RipGrepJsonMatch, Match, Options } from './types';
+import { RipGrepError, Match, Options } from './types';
 
 export * from './types';
 
 const execLog = debug('ripgrep-js:exec');
 
-function formatResults(stdout: string) {
+function formatResults(stdout: string): Match[] {
   stdout = stdout.trim();
 
   if (!stdout) {
@@ -17,14 +17,7 @@ function formatResults(stdout: string) {
     .split('\n')
     .map((line) => JSON.parse(line))
     .filter((jsonLine) => jsonLine.type === 'match')
-    .reduce((acc, resultJson: RipGrepJsonMatch) => {
-      return [
-        // Previous matches
-        ...acc,
-        // One new result per sub-match
-        ...resultJson.data.submatches.map((submatch) => new Match(resultJson, submatch)),
-      ];
-    }, [] as Match[]);
+    .map((jsonLine) => jsonLine.data);
 }
 
 export function ripGrep(cwd: string, searchTerm: string): Promise<Array<Match>>;

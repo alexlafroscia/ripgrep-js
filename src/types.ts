@@ -37,21 +37,7 @@ export type RipGrepJsonMatch = {
   };
 };
 
-export class Match {
-  file: string;
-  line: number;
-  column: number;
-  match: string;
-
-  constructor(jsonResult: RipGrepJsonMatch, subMatch: RipgrepJsonSubmatch) {
-    this.file = jsonResult.data.path.text;
-    this.line = jsonResult.data.line_number;
-
-    // Account for 0-index column numbers (when we want 1-index)
-    this.column = subMatch.start + 1;
-    this.match = subMatch.match.text;
-  }
-}
+export type Match = RipGrepJsonMatch['data'];
 
 export class RipGrepError {
   private error: ExecException;
