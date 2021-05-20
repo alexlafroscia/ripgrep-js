@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/alexlafroscia/ripgrep-js/compare/v2.3.0...v3.0.0) (2021-05-20)
+
+### ⚠ BREAKING CHANGES
+
+- The output of the search command is now different; it's a JSON representation that matches the format that RipGrep itself produces exactly.
+
+- remove custom `Match` class ([939ff87](https://github.com/alexlafroscia/ripgrep-js/commit/939ff87e16ff41f9dc8195b1cafbef018d55e260))
+
 ## [2.3.0](https://github.com/alexlafroscia/ripgrep-js/compare/v2.2.0...v2.3.0) (2021-05-20)
 
 ### Features
