@@ -13,6 +13,7 @@ type LocatorOptions = StringSearchOptions | RegexSearchOptions;
 export type Options = LocatorOptions & {
   globs?: Array<string>;
   fileType?: string | Array<string>;
+  multiline?: boolean;
 };
 
 export type RipgrepJsonSubmatch = {

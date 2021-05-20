@@ -115,6 +115,21 @@ describe('search api', function () {
 
     expect(result.length).toBe(0);
   });
+
+  test('can perform a multi-line search', async function () {
+    const temp = await factory.createStructure({
+      'foo.txt': `
+        foo
+        bar
+      `,
+    });
+    const result = await rg(temp.dir, {
+      regex: '"foo\\n(\\s*)bar"',
+      multiline: true,
+    });
+
+    expect(result.length).toBe(1);
+  });
 });
 
 describe('Match class', function () {

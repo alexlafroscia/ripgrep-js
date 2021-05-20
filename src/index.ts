@@ -72,6 +72,10 @@ export function ripGrep(cwd: string, optionsOrSearchTerm: Options | string): Pro
     }, execString);
   }
 
+  if (options.multiline) {
+    execString = `${execString} --multiline`;
+  }
+
   execLog(execString);
 
   return new Promise(function (resolve, reject) {
