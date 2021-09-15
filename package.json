@@ -31,7 +31,7 @@
     "@movable/prettier-config": "^0.3.6",
     "@tsconfig/node14": "^1.0.0",
     "@types/debug": "^4.1.5",
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^27.0.1",
     "@types/node": "^16.0.0",
     "file-fixture-factory": "^1.0.0",
     "husky": "^7.0.1",
