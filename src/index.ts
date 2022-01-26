@@ -69,10 +69,12 @@ export function ripGrep(cwd: string, optionsOrSearchTerm: Options | string): Pro
     execString = `${execString} --multiline`;
   }
 
+  execString+=` -- ${cwd}`
+
   execLog(execString);
 
   return new Promise(function (resolve, reject) {
-    exec(execString, { cwd }, (error, stdout, stderr) => {
+    exec(execString, (error, stdout, stderr) => {
       if (!error || (error && stderr === '')) {
         resolve(formatResults(stdout));
       } else {
