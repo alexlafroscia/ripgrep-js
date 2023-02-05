@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "@movable/eslint-config",
+    "@movable/eslint-config-node"
+  ],
+  "overrides": [
+    {
+      "files": ["tests/**/*.*"],
+      "rules": {
+        "node/no-unpublished-require": "off"
+      }
+    }
+  ]
+}
