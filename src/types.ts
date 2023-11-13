@@ -14,6 +14,7 @@ export type Options = LocatorOptions & {
   globs?: Array<string>;
   fileType?: string | Array<string>;
   multiline?: boolean;
+  env?: Record<string, string>;
 };
 
 export type RipgrepJsonSubmatch = {
